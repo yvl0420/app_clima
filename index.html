@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>App Clima — Neumorfismo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-wrap">
+    <header class="cabecera card">
+      <div class="brand">
+        <h1>App Clima</h1>
+        <p class="tag">Clima actual y previsión 5 días</p>
+      </div>
+      <div class="controls">
+        <button id="themeToggle" class="btn icon-btn" aria-label="Cambiar tema">🌓</button>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- LEFT: Buscador + Resultado + Pronóstico -->
+      <section class="card busqueda">
+        <form id="formularioClima" class="form-buscar" autocomplete="off" aria-label="Buscar ciudad">
+          <input id="entradaCiudad" type="search" placeholder="Buscar ciudad (ej. Albacete)" required />
+          <button type="submit" class="btn primary">Buscar</button>
+        </form>
+
+        <div id="resultadoClima" class="resultado hidden" aria-live="polite">
+          <article class="tarjeta-clima">
+            <div class="izq">
+              <div id="iconoClima" class="icono-clima" aria-hidden="true"></div>
+            </div>
+            <div class="der">
+              <h2 id="nombreCiudad" class="nombre-ciudad"></h2>
+              <p id="descripcion" class="desc"></p>
+              <p class="temp"><span id="temperatura"></span> °C</p>
+              <p class="datos-peq"><span id="humedad"></span>% humedad • Viento <span id="viento"></span> m/s</p>
+            </div>
+          </article>
+        </div>
+
+        <section id="pronosticoSection" class="card pronostico hidden">
+          <h3>Previsión 5 días</h3>
+          <div id="contenedorPronosticos" class="contenedor-pronosticos"></div>
+        </section>
+      </section>
+
+      <!-- RIGHT: Historial -->
+      <aside class="card historial">
+        <div class="historial-cab">
+          <h3>Historial</h3>
+          <small id="hintRecargar">Pulsa para recargar</small>
+        </div>
+
+        <div id="contenedorHistorial" class="contenedor-historial" tabindex="0" aria-label="Historial de búsquedas">
+          <!-- items generados dinámicamente -->
+        </div>
+
+        <!-- Contenedor para la paginación numerada (JS lo rellenará en desktop) -->
+        <nav id="histPager" class="hist-pager" aria-label="Paginación historial" role="navigation"></nav>
+      </aside>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>Desarrollado por <a href="https://github.com/yvl0420" target="_blank" rel="noopener">yvl0420</a> • Datos: OpenWeather</p>
+    </div>
+  </footer>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>

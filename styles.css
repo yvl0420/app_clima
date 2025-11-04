@@ -1,0 +1,252 @@
+/* =========================
+   Styles App Clima — Neumorfismo Dark/Light (final)
+   ========================= */
+
+/* Variables */
+:root{
+  --bg: #0b0f14;
+  --surface: #0f1620;
+  --card: #101722;
+  --muted: #9aa6b2;
+  --text: #e6eef8;
+  --accent: #6fd3ff;
+  --soft-shadow: 8px 8px 18px rgba(2,6,23,0.6);
+  --glow: 0 6px 20px rgba(14,165,233,0.06);
+  --radius: 16px;
+  --footer-sep: rgba(255,255,255,0.04);
+  --container-max: 1100px;
+  --gap: 18px;
+}
+
+/* Light theme overrides */
+body.light{
+  --bg: #eef2f7;
+  --surface: #f7f9fc;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --text: #0b1020;
+  --accent: #0ea5e9;
+  --soft-shadow: 10px 10px 24px rgba(163,177,198,0.15);
+  --footer-sep: rgba(15,23,36,0.06);
+}
+
+/* Base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+
+/* app wrapper */
+.app-wrap{
+  width:100%;
+  max-width:var(--container-max);
+  margin:28px auto 18px;
+  padding:0 20px;
+  flex:1 0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:var(--gap);
+}
+
+/* card neumorfismo */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border-radius:var(--radius);
+  padding:14px;
+  box-shadow: var(--soft-shadow);
+  border:1px solid rgba(255,255,255,0.02);
+}
+
+/* Header */
+.cabecera{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:16px;
+}
+.brand h1{margin:0;font-size:1.15rem}
+.tag{margin:2px 0 0;color:var(--muted);font-size:0.85rem}
+
+/* controls */
+.icon-btn{
+  background:transparent;border:1px solid rgba(255,255,255,0.04);
+  padding:8px;border-radius:10px;cursor:pointer;color:var(--text);
+}
+
+/* main layout: 2 columnas (left content + aside historial) */
+.main{
+  display:grid;
+  grid-template-columns: 1fr 360px;
+  gap:var(--gap);
+}
+
+/* stack on small screens */
+@media(max-width:880px){
+  .main{grid-template-columns:1fr; }
+}
+
+/* búsqueda (idéntico al primer diseño simple) */
+.form-buscar{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+.form-buscar input{
+  flex:1;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  color:var(--text);
+  outline:none;
+}
+.form-buscar input::placeholder{color:var(--muted)}
+.btn{border:none;padding:10px 12px;border-radius:10px;cursor:pointer}
+.btn.primary{background:linear-gradient(180deg,var(--accent), rgba(110,200,255,0.9)); color:#041025;font-weight:700;}
+
+/* resultado clima */
+.resultado{margin-top:12px}
+.tarjeta-clima{display:flex;gap:16px;align-items:center}
+.izq{min-width:96px}
+.icono-clima{
+  width:96px;height:96px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  color:var(--accent);
+  font-size:36px;
+}
+.der{flex:1;min-width:0}
+.nombre-ciudad{margin:0;font-size:1.1rem}
+.desc{margin:6px 0 0;color:var(--muted);text-transform:capitalize}
+.temp{margin:10px 0 0;font-size:1.6rem;font-weight:800}
+.datos-peq{margin:6px 0 0;color:var(--muted)}
+
+/* HISTORIAL (columna vertical paginada) */
+.historial-cab{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.contenedor-historial{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+  max-height:60vh;
+  overflow:auto;
+  padding:4px;
+}
+
+/* cada item es tarjeta completa (neumorfismo) */
+.hist-item{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:12px;
+  border-radius:12px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  border:1px solid rgba(255,255,255,0.02);
+  box-shadow: var(--soft-shadow);
+  cursor:pointer;
+}
+.hist-item .ciudad{ font-weight:700; font-size:0.98rem; }
+.hist-item small{ color:var(--muted); }
+
+/* PAGINACIÓN numerada (B - tamaño M) */
+.hist-pager{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  margin-top:12px;
+  padding-top:8px;
+  flex-wrap:wrap;
+}
+
+/* flechas prev/next */
+.pager-prev, .pager-next {
+  min-width:40px;
+  height:38px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:transparent;
+  color:var(--text);
+  font-size:1.1rem;
+  cursor:pointer;
+}
+.pager-prev:disabled, .pager-next:disabled { opacity:0.32; cursor:not-allowed; }
+
+/* botones numerados */
+.pager-num {
+  min-width:36px;
+  height:36px;
+  padding:0 10px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:9px;
+  border:1px solid rgba(255,255,255,0.04);
+  background:transparent;
+  color:var(--text);
+  cursor:pointer;
+  transition: transform .12s ease, background .12s ease, border-color .12s ease;
+}
+.pager-num:hover { transform:translateY(-3px); border-color: rgba(14,165,233,0.16); }
+.pager-num.active {
+  background: linear-gradient(180deg, rgba(14,165,233,0.12), rgba(14,165,233,0.06));
+  border-color: rgba(14,165,233,0.28);
+  color: #041025;
+}
+
+/* info compacta */
+.pager-info{ font-size:0.95rem; color:var(--muted); padding:0 6px; }
+
+/* PRONÓSTICO: GRID adaptativo (M3) */
+.pronostico{margin-top:12px}
+.contenedor-pronosticos{
+  display:grid;
+  gap:12px;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  align-items:start;
+  padding:8px 0;
+}
+.card-pron{
+  border-radius:12px;
+  padding:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
+  display:flex;flex-direction:column;gap:6px;align-items:center;border:1px solid rgba(255,255,255,0.02);
+}
+.card-pron .dia{font-weight:700}
+.card-pron .t{font-size:1.1rem;font-weight:700}
+.card-pron small{color:var(--muted);text-transform:capitalize}
+
+/* Footer sticky abajo con separación visual */
+.footer{
+  border-top:1px solid var(--footer-sep);
+  padding:12px 20px;
+  text-align:center;
+  background: linear-gradient(180deg, transparent, rgba(0,0,0,0.02));
+  flex-shrink:0;
+}
+.footer a{color:var(--accent);text-decoration:none}
+
+/* Utilities */
+.hidden{display:none}
+
+/* Responsive tweaks */
+@media(max-width:680px){
+  .icono-clima{ width:72px;height:72px }
+  .tarjeta-clima{ gap:12px }
+  .hist-item{ padding:10px }
+  .contenedor-historial{ max-height:45vh }
+  .app-wrap{ margin:18px auto 10px; padding:0 12px }
+  .form-buscar input{ padding:10px }
+}
